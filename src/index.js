@@ -1,13 +1,17 @@
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
-require('./mongoose')
+const dotenv = require('dotenv')
 
 // Initializer
 const app = express()
 
 // Settings
+dotenv.config()
 app.set('port', process.env.PORT || 3200)
+
+// database-connection
+require('./mongoose')
 
 // Middlewares
 app.use(express.json())
