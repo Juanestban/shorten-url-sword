@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js",
+    "prepare": "husky install",
     "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
     "test": "echo hasn't a test for this momment"
   },
   "keywords": [],
@@ -18,6 +19,8 @@
     "eslint-plugin-import": "2.24.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.1.0",
+    "husky": "7.0.1",
+    "lint-staged": "11.1.2",
     "nodemon": "2.0.12",
     "prettier": "2.3.2"
   },
@@ -29,5 +32,9 @@
     "morgan": "1.10.0",
     "shortid": "2.2.16",
     "valid-url": "1.0.9"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   }
 }
