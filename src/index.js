@@ -3,6 +3,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
 const handleNotFound = require('./middlewares/handleNotFound')
+const handleErrors = require('./middlewares/handleErrors')
 
 // Initializer
 const app = express()
@@ -32,6 +33,9 @@ app.use('/api', require('./routes/index.routes'))
 
 // handle the url if this hasn't exist
 app.use(handleNotFound)
+
+// handle errors
+app.use(handleErrors)
 
 // Starting server
 app.listen(app.get('port'), () => {
