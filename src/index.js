@@ -28,6 +28,9 @@ app.get('/', (_, res) => {
   res.status(200).send('<h1>Hello world!</h1>').end()
 })
 
+// path: /short
+app.use('/short', require('./routes/shortenCode.routes'))
+
 // path: /api
 app.use('/api', require('./routes/index.routes'))
 
