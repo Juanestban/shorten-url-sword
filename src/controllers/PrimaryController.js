@@ -3,9 +3,21 @@ class PrimaryController {
     this.SchemeMongo = SchemeMongo
   }
 
-  findAll = async (_, res, next) => {
+  findAll = async (req, res, next) => {
     try {
-      const arraysObjects = await this.SchemeMongo.find()
+      const { decodedToken, path } = req
+      const { id } = decodedToken
+      const pathname = path.substring(1)
+      let arraysObjects
+
+      if (pathname === 'shortenUrls') {
+        arraysObjects = await this.SchemeMongo.findOne({ userId: id })
+        if (!arraysObjects) return res.status(200).json([]).end()
+        return res.status(200).json(arraysObjects).end()
+      }
+
+      arraysObjects = await this.SchemeMongo.findOne({ _id: id })
+
       return res.status(200).json(arraysObjects).end()
     } catch (e) {
       next(e)

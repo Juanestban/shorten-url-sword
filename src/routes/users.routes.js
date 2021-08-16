@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const { userController } = require('../controllers/UsersController')
+const { sessionController } = require('../controllers/SessionController')
 
 const router = Router()
 
@@ -17,6 +18,9 @@ router.put('/users/:id', userController.update)
 
 // delete some user
 router.delete('/users/:id', userController.delete)
+
+// session || login route
+router.post('/login', sessionController.login)
 
 const userRouter = router
 

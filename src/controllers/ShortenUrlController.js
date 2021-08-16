@@ -1,5 +1,6 @@
 const validUrl = require('valid-url')
 const shortid = require('shortid')
+const jwt = require('jsonwebtoken')
 const PrimaryController = require('./PrimaryController')
 const { ShortenUrl } = require('../models/ShortenUrl')
 const { baseUrl } = require('../config/baseUrl')
@@ -10,11 +11,8 @@ class ShortenUrlController extends PrimaryController {
   }
 
   create = async (req, res, next) => {
-    const { body, headers } = req
+    const { body, headers, decodedToken } = req
     const { longUrl } = body
-    const { authorization } = headers
-
-    // missing implement jwt
 
     if (!validUrl.isUri(longUrl))
       return res
@@ -37,11 +35,12 @@ class ShortenUrlController extends PrimaryController {
           .end()
 
       const shortUrl = `${baseUrl}/short/${urlCode}`
+      const { id: userId } = decodedToken
       const shortenUrl = new ShortenUrl({
         longUrl,
         shortUrl,
         urlCode,
-        userId: authorization ?? '',
+        userId,
         date: new Date(),
       })
       const savedShortenUrl = await shortenUrl.save()
