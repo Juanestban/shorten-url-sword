@@ -3,12 +3,13 @@ const { Schema, model } = require('mongoose')
 const UsersSchema = new Schema({
   username: String,
   email: String,
-  password: String,
-  audit: {
-    createdAt: Date.now,
-    updatedAt: Date,
-    deletedAt: Date,
-  },
+  passwordHash: String,
+  shortenUrls: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'ShortenUrls',
+    },
+  ],
 })
 
 UsersSchema.set('toJSON', {
@@ -16,7 +17,12 @@ UsersSchema.set('toJSON', {
     returnedObject.id = returnedObject._id
     delete returnedObject._id
     delete returnedObject.__v
+
+    // never return the passwordHash
+    delete returnedObject.passwordHash
   },
 })
 
-module.exports = model('UsersSchema', UsersSchema)
+const User = model('Users', UsersSchema)
+
+module.exports = { User }

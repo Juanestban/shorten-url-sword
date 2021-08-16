@@ -4,6 +4,10 @@ const ShortenUrlScheme = new Schema({
   urlCode: String,
   longUrl: String,
   shortUrl: String,
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users',
+  },
   date: {
     type: String,
     default: Date.now,
@@ -18,4 +22,4 @@ ShortenUrlScheme.set('toJSON', {
   },
 })
 
-module.exports = model('ShortenUrl', ShortenUrlScheme)
+module.exports = model('ShortenUrls', ShortenUrlScheme)
