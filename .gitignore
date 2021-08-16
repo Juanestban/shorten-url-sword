@@ -8,6 +8,8 @@ node_modules/*
 dist/*
 build/*
 
-
 ### environment ###
 .env
+
+### eslint-cache ###
+.eslintcache
