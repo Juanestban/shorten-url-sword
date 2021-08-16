@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const router = Router()
 const { userRouter } = require('./users.routes')
+const { shortenUrlRouter } = require('./shortenUrl.routes')
 
 router.get('/', (_, res) => {
   res
@@ -12,5 +13,6 @@ router.get('/', (_, res) => {
 })
 
 router.use(userRouter)
+router.use(shortenUrlRouter)
 
 module.exports = router

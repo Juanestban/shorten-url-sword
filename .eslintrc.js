@@ -13,6 +13,7 @@ module.exports = {
   },
   rules: {
     'comma-dangle': 0,
+    'no-unused-vars': 0,
     'import/first': 0,
     'space-before-function-paren': 0,
   },

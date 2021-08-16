@@ -22,4 +22,6 @@ ShortenUrlScheme.set('toJSON', {
   },
 })
 
-module.exports = model('ShortenUrls', ShortenUrlScheme)
+const ShortenUrl = model('ShortenUrls', ShortenUrlScheme)
+
+module.exports = { ShortenUrl }
