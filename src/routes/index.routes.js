@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const router = Router()
+const { userRouter } = require('./users.routes')
 
 router.get('/', (_, res) => {
   res
@@ -9,5 +10,7 @@ router.get('/', (_, res) => {
     })
     .end()
 })
+
+router.use(userRouter)
 
 module.exports = router
