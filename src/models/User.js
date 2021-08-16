@@ -4,12 +4,6 @@ const UsersSchema = new Schema({
   username: String,
   email: String,
   passwordHash: String,
-  shortenUrls: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'ShortenUrls',
-    },
-  ],
 })
 
 UsersSchema.set('toJSON', {
