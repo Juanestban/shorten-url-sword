@@ -4,8 +4,6 @@ const { userRouter } = require('./users.routes')
 const { shortenUrlRouter } = require('./shortenUrl.routes')
 const handleAuth = require('../middlewares/handleAuth')
 
-router.use(handleAuth)
-
 router.get('/', (_, res) => {
   res
     .status(200)
@@ -16,6 +14,7 @@ router.get('/', (_, res) => {
 })
 
 router.use(userRouter)
+// router.use(handleAuth)
 router.use(shortenUrlRouter)
 
 module.exports = router
