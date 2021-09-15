@@ -11,7 +11,7 @@ class ShortenUrlController extends PrimaryController {
   }
 
   create = async (req, res, next) => {
-    const { body, headers, decodedToken } = req
+    const { body, decodedToken } = req
     const { longUrl } = body
 
     if (!validUrl.isUri(longUrl))

@@ -2,11 +2,16 @@ const { request } = require('express')
 const jwt = require('jsonwebtoken')
 
 const handleAuth = (req, res, next) => {
-  const { headers } = req
+  const { headers, method, path } = req
   const { authorization } = headers
   const { JWT_PASSWORD } = process.env
   let token = ''
   let decodedToken = {}
+  const pathname = path.substring(1)
+  request.pathname = pathname
+
+  if ((pathname === 'users' && method === 'POST') || pathname === 'login')
+    return next()
 
   if (authorization && authorization.toLowerCase().startsWith('bearer')) {
     token = authorization.substring(7)
@@ -24,7 +29,7 @@ const handleAuth = (req, res, next) => {
 
   request.decodedToken = decodedToken
 
-  next()
+  return next()
 }
 
 module.exports = handleAuth

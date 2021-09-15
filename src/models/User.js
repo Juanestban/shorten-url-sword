@@ -4,8 +4,16 @@ const UsersSchema = new Schema({
   username: {
     type: String,
     unique: true,
+    required: true,
   },
-  passwordHash: String,
+  passwordHash: { type: String, required: true },
+  rol: {
+    type: String,
+    required: true,
+    uppercase: true,
+    enum: ['USER', 'ADMIN'],
+    default: 'USER',
+  },
 })
 
 UsersSchema.set('toJSON', {

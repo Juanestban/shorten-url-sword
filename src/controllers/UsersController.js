@@ -10,7 +10,7 @@ class UsersController extends PrimaryController {
   create = async (req, res, next) => {
     try {
       const { body } = req
-      const { username, password } = body
+      const { username, password, rol } = body
       const userValidateUsername = await User.findOne({ username })
       const message = `this username already exist`
 
@@ -22,6 +22,7 @@ class UsersController extends PrimaryController {
       const user = new User({
         username,
         passwordHash,
+        rol,
       })
 
       const savedUser = await user.save()
